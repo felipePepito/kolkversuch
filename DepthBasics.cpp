@@ -8,6 +8,7 @@
 #include <strsafe.h>
 #include "DepthBasics.h"
 #include "resource.h"
+#include <iostream>
 
 /// <summary>
 /// Entry point for the application
@@ -239,7 +240,23 @@ LRESULT CALLBACK CDepthBasics::DlgProc(HWND hWnd, UINT message, WPARAM wParam, L
                     m_pNuiSensor->NuiImageStreamSetImageFrameFlags(m_pDepthStreamHandle, m_bNearMode ? NUI_IMAGE_STREAM_FLAG_ENABLE_NEAR_MODE : 0);
                 }
             }
+			// Handle recording of dephts
+			else if (IDC_FIRST_RECORD == LOWORD(wParam)) 
+			{
+				// stdout for testing
+				std::cout << "record 1 made" << std::endl;
+				SetStatusMessage(L"record 1 made");
+			}
+			else if (IDC_SECOND_RECORD == LOWORD(wParam)) 
+			{
+				// stdout for testing
+				std::cout << "record 2 made" << std::endl;
+				SetStatusMessage(L"record 2 made");
+			}
             break;
+
+		
+		
     }
 
     return FALSE;
