@@ -1,0 +1,51 @@
+
+____
+reinterpret_cast < new_type > ( expression ) 		
+
+Converts between types by reinterpreting the underlying bit pattern.
+Returns a value of type new_type.
+
+Unlike static_cast, but like const_cast, the reinterpret_cast expression 
+does not compile to any CPU instructions. It is purely a compiler directive which instructs 
+the compiler to treat the sequence of bits (object representation) of expression 
+as if it had the type new_type. 
+
+_____
+SAL
+
+The Microsoft source-code annotation language (SAL) 
+provides a set of annotations that you can use to 
+describe how a function uses its parameters, 
+the assumptions that it makes about them, and the guarantees that it makes when it finishes. 
+
+The annotations are defined in the header file <sal.h>
+
+Example: 
+_In_ 
+Data is passed to the called function, and is treated as read-only.
+
+_____
+Windows Data Types
+
+LRESULT (typedef long LONG_PTR)
+CALLBACK (#define CALLBACK __stdcall) calling convention for calling the function
+
+_____
+LONG_PTR WINAPI SetWindowLongPtr(
+  _In_  HWND hWnd,
+  _In_  int nIndex,
+  _In_  LONG_PTR dwNewLong
+);
+
+Changes an attribute of the specified window. 
+The function also sets a value at the specified offset in the extra window memory. 
+
+_____
+HANDLE WINAPI CreateEvent(
+  _In_opt_  LPSECURITY_ATTRIBUTES lpEventAttributes,
+  _In_      BOOL bManualReset,
+  _In_      BOOL bInitialState,
+  _In_opt_  LPCTSTR lpName
+);
+
+Creates or opens a named or unnamed event object.
