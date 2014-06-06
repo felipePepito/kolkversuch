@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 05.06.2014 15:05:32 gestartet.
+﻿Der Buildvorgang wurde am 06.06.2014 11:10:33 gestartet.
      1>Projekt "C:\Users\Koala\Documents\Visual Studio 2013\Projects\DepthBasics-D2D\DepthBasics-D2D.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt DepthBasics.cpp
@@ -12,4 +12,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.88
+Verstrichene Zeit 00:00:01.56

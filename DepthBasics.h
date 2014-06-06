@@ -84,6 +84,12 @@ private:
     /// <returns>S_OK on success, otherwise failure code</returns>
     HRESULT                 CreateFirstConnected();
 
+	/// <summary>
+	/// Save the current Depth Frame 
+	/// </summary>
+	/// <returns>S_OK on success, otherwise failure code</returns>
+	HRESULT						SaveDepthFrame();
+
     /// <summary>
     /// Handle new depth data
     /// </summary>

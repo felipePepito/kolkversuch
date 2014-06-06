@@ -330,6 +330,16 @@ HRESULT CDepthBasics::CreateFirstConnected()
 }
 
 /// <summary>
+/// Save the current Depth Frame 
+/// </summary>
+/// <returns>S_OK on success, otherwise failure code</returns>
+HRESULT CDepthBasics::SaveDepthFrame()
+{
+	return 0;
+}
+
+
+/// <summary>
 /// Handle new depth data
 /// </summary>
 void CDepthBasics::ProcessDepth()
@@ -366,12 +376,16 @@ void CDepthBasics::ProcessDepth()
         // Get the min and max reliable depth for the current frame
         int minDepth = (nearMode ? NUI_IMAGE_DEPTH_MINIMUM_NEAR_MODE : NUI_IMAGE_DEPTH_MINIMUM) >> NUI_IMAGE_PLAYER_INDEX_SHIFT;
         int maxDepth = (nearMode ? NUI_IMAGE_DEPTH_MAXIMUM_NEAR_MODE : NUI_IMAGE_DEPTH_MAXIMUM) >> NUI_IMAGE_PLAYER_INDEX_SHIFT;
+		int depthRange = maxDepth - minDepth;
 
         BYTE * rgbrun = m_depthRGBX;
         const NUI_DEPTH_IMAGE_PIXEL * pBufferRun = reinterpret_cast<const NUI_DEPTH_IMAGE_PIXEL *>(LockedRect.pBits);
 
         // end pixel is start + width*height - 1
         const NUI_DEPTH_IMAGE_PIXEL * pBufferEnd = pBufferRun + (cDepthWidth * cDepthHeight);
+
+		double dintensity;
+		unsigned int iintensity;
 
         while ( pBufferRun < pBufferEnd )
         {
@@ -385,7 +399,23 @@ void CDepthBasics::ProcessDepth()
 
             // Note: Using conditionals in this loop could degrade performance.
             // Consider using a lookup table instead when writing production code.
-            BYTE intensity = static_cast<BYTE>(depth >= minDepth && depth <= maxDepth ? depth % 256 : 0);
+
+			BYTE intensity; // = static_cast<BYTE>(depth >= minDepth && depth <= maxDepth ? depth % 256 : 0);
+
+			if (depth >= maxDepth) 
+			{
+				intensity = static_cast<BYTE>(0);
+			}
+			else if (depth <= minDepth) 
+			{
+				intensity = static_cast<BYTE>(255);
+			}
+			else 
+			{
+				dintensity = ((double)(depth - minDepth) / depthRange) * 255;
+				iintensity = (unsigned int)dintensity;
+				intensity = static_cast<BYTE>(iintensity);
+			}
 
             // Write out blue byte
             *(rgbrun++) = intensity;
